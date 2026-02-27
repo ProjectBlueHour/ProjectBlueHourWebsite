@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Blue Hour | Portfolio Hub</title>
+    <!-- Google Fonts: Cinzel for classical beginnings, Montserrat for modern clarity -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;800&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons for clean UI -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --accent: #f97316; /* Sunrise Orange */
+            --bg-start: #000000; /* Black */
+            --bg-mid: #1e40af;   /* Blue */
+            --bg-end: #ffffff;   /* White */
+            --card-bg: rgba(10, 15, 30, 0.85);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(to bottom, var(--bg-start), var(--bg-mid), var(--bg-end));
+            background-attachment: fixed;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Header & Hero --- */
+        header {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            max-width: 100vw;
+        }
+
+        .hero-title {
+            font-family: var(--font-title);
+            font-size: clamp(2rem, 8vw, 6rem); 
+            margin: 0;
+            letter-spacing: 8px;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            text-transform: uppercase;
+            line-height: 1.1;
+            width: 90%;
+            max-width: 1400px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-body);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            font-weight: 300;
+            max-width: 800px;
+            margin-top: 2rem;
+            line-height: 1.8;
+            letter-spacing: 1px;
+            padding: 0 1rem;
+        }
+
+        /* --- Section Title --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: white;
+            opacity: 0.8;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        /* --- Project Grid --- */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem 8rem 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 0px; 
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-image {
+            height: 180px;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            position: relative;
+        }
+
+        .card-body {
+            padding: 2rem;
+            flex-grow: 1;
+        }
+
+        .card-tag {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card h3 {
+            font-family: var(--font-title);
+            margin: 0.8rem 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        .card p {
+            font-family: var(--font-body);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .card-link {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        /* --- Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 1rem;
+        }
+
+        .modal-container {
+            background: #0f172a;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            border: 1px solid var(--accent);
+            position: relative;
+            overflow-y: auto;
+            animation: modalScale 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        @keyframes modalScale {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #64748b;
+            font-family: var(--font-body);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            header { min-height: 60vh; padding: 1.5rem; }
+            .hero-title { font-size: clamp(1.8rem, 10vw, 3rem); letter-spacing: 4px; }
+            .container { padding: 2rem 1rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="hero-title">Project Blue Hour</h1>
+    <p class="hero-subtitle">
+        Where every end marks the threshold of a new beginning.
+    </p>
+</header>
+
+<main class="container">
+    <div class="section-header">
+        <h2>Archive</h2>
+    </div>
+
+    <div class="grid" id="projectGrid">
+        <div class="card" onclick="openModal('Subproject Alpha', 'A deep neural exploration into the mechanics of pattern recognition.', 'Intelligence')">
+            <div class="card-image"><i data-lucide="brain-circuit" size="48"></i></div>
+            <div class="card-body">
+                <span class="card-tag">Intelligence</span>
+                <h3>Alpha Origin</h3>
+                <p>Neural pattern recognition engine optimized for the threshold of discovery.</p>
+                <div class="card-link">Explore <i data-lucide="chevron-right" size="14"></i></div>
+            </div>
+        </div>
+
+        <div class="card" onclick="openModal('Subproject Beta', 'A minimalist interface designed to visualize data flows.', 'Interface')">
+            <div class="card-image"><i data-lucide="monitor" size="48"></i></div>
+            <div class="card-body">
+                <span class="card-tag">Interface</span>
+                <h3>Beta Horizon</h3>
+                <p>A high-performance observation deck for multi-threaded system metrics.</p>
+                <div class="card-link">Explore <i data-lucide="chevron-right" size="14"></i></div>
+            </div>
+        </div>
+
+        <div class="card" onclick="openModal('Subproject Gamma', 'Fundamental orchestration layer for cloud environments.', 'Foundations')">
+            <div class="card-image"><i data-lucide="terminal" size="48"></i></div>
+            <div class="card-body">
+                <span class="card-tag">Foundations</span>
+                <h3>Gamma Core</h3>
+                <p>Distributed orchestration utility for cross-service synchronization.</p>
+                <div class="card-link">Explore <i data-lucide="chevron-right" size="14"></i></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-container">
+        <button class="modal-close" onclick="closeModal()">
+            <i data-lucide="x" size="24"></i>
+        </button>
+        <div class="modal-body" style="padding: 4rem 3rem;">
+            <span id="modalTag" class="card-tag"></span>
+            <h2 id="modalTitle" style="font-family: var(--font-title); color: white; font-size: 2.5rem; margin-bottom: 1.5rem;"></h2>
+            <p id="modalDesc" style="font-family: var(--font-body); color: var(--text-dim); line-height: 1.8; font-size: 1.1rem;"></p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Established 2026 &bull; Project Blue Hour</p>
+</footer>
+
+<script>
+    lucide.createIcons();
+
+    const modal = document.getElementById('modalOverlay');
+    
+    function openModal(title, desc, category) {
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalDesc').innerText = desc;
+        document.getElementById('modalTag').innerText = category;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    window.onclick = (e) => { 
+        if (e.target === modal) closeModal(); 
+    }
+</script>
+
+</body>
+</html>
